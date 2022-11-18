@@ -55,7 +55,7 @@ export const ScreenRadios = ({ onNumericInputChange, numericFilters }) => {
           onChange={onNumericInputChange}
         />
         <label className="form-check-label" htmlFor="screen3">
-          {`=> 17"`}
+          {`>= 17"`}
         </label>
       </div>
 
