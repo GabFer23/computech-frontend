@@ -27,7 +27,7 @@ export const MainPage = () => {
 
   // ! ================================================================================================
 
-  const [params, setParams] = useState({ page: Number(page), pageSize: 5 });
+  const [params, setParams] = useState({ page: Number(page) });
 
   // ! ================================================================================================
 

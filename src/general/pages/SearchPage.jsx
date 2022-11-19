@@ -36,7 +36,7 @@ export const SearchPage = () => {
 
   // ! ================================================================================================
 
-  const [params, setParams] = useState({ page: Number(page), q, pageSize: 5 });
+  const [params, setParams] = useState({ page: Number(page), q });
 
   // ! ================================================================================================
 
