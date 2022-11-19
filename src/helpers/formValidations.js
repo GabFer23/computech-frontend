@@ -34,8 +34,8 @@ const registerFormValidations = {
 
 const computerFormValidations = {
   // * Step One
-  title: [(value) => value.length >= 3, 'Título no válido'],
-  description: [(value) => value.length >= 3, 'Descripción no válida'],
+  title: [(value) => value?.length >= 3, 'Título no válido'],
+  description: [(value) => value?.length >= 3, 'Descripción no válida'],
   price: [(value) => value > 100, 'Precio no válido'],
   screen: [
     (value) => value >= 0 && value <= 20,

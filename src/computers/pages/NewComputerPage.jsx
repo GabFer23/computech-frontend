@@ -1,6 +1,24 @@
 import { useComputersStore } from '../../hooks';
 import { MainLayout } from '../../general/layout';
 import { ComputerForm } from '../components';
+// ! ==================================================================================
+
+const formFields = {
+  title: '',
+  description: '',
+  price: '',
+  screen: 0,
+  storageType: '',
+  storage: '',
+  RAM: '',
+  OS: '',
+  category: '',
+  backLightKeyboard: false,
+  brand: '',
+  images: ['', '', '', ''],
+};
+
+// ? =================================================================================================================
 
 export const NewComputerPage = () => {
   // ! ==================================================================================
@@ -24,7 +42,7 @@ export const NewComputerPage = () => {
     <MainLayout>
       <div className="row w-100 justify-content-center align-content-center">
         <div className="p-5 shadow rounded col-sm-12 col-md-10 col-lg-8 ">
-          <ComputerForm startSavingComputer={startSavingComputer} />
+          <ComputerForm formFields={formFields}/>
         </div>
       </div>
     </MainLayout>

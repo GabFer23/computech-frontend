@@ -3,32 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AlertMessage, Spinner } from '../../general/components';
 import { computerFormValidations } from '../../helpers';
-import { useBrandsStore, useForm } from '../../hooks';
+import { useBrandsStore, useComputersStore, useForm } from '../../hooks';
 import { StepOne, StepTwo, StepThree, FormProgressBar, FormFooter } from './';
-
-// ! ==================================================================================
-
-const formFields = {
-  title: '',
-  description: '',
-  price: '',
-  screen: 0,
-  storageType: '',
-  storage: '',
-  RAM: '',
-  OS: '',
-  category: '',
-  backLightKeyboard: false,
-  brand: '',
-  images: ['', '', '', ''],
-};
 
 // ? =================================================================================================================
 
-export const ComputerForm = ({
-  activeComputer = null,
-  startSavingComputer,
-}) => {
+export const ComputerForm = ({ formFields }) => {
+  // * ====================== HOOK PARA STORE DE COMPUTADORES ======================
+  
+  const { startSavingComputer } = useComputersStore();
+  
+    // ! ==================================================================================
+    // * ====================== HOOK PARA STORE DE MARCAS ======================
+  
+    const { startLoadingBrands, isLoadingBrands, brands } = useBrandsStore();
+
+  // ! ==================================================================================
   // * ====================== ESTADO PARA PASOS DEL FORMULARIO ======================
 
   const [page, setPage] = useState(0);
@@ -37,19 +27,6 @@ export const ComputerForm = ({
   // * ====================== ESTADO PARA ENVÍO DEL FORMULARIO ======================
 
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  // ! ==================================================================================
-
-  useEffect(() => {
-    if (activeComputer !== null) {
-      setFormState({ ...activeComputer, brand: activeComputer.brand._id });
-    }
-  }, [activeComputer]);
-
-  // ! ==================================================================================
-  // * ====================== HOOK PARA STORE DE MARCAS ======================
-
-  const { startLoadingBrands, isLoadingBrands, brands } = useBrandsStore();
 
   // ! ==================================================================================
   // * ============= OBTENER LAS MARCAS PARA USARLAS EN EL FORMULARIO =============
@@ -167,16 +144,15 @@ export const ComputerForm = ({
   };
 
   // ! ==================================================================================
-   // * ===================== MOSTRAR SPINNER DURANTE CARGA =====================
+  // * ===================== MOSTRAR SPINNER DURANTE CARGA =====================
 
-   if (isLoadingBrands) {
+  if (isLoadingBrands) {
     return (
       <div className="d-flex" style={{ height: '80vh' }}>
         <Spinner />
       </div>
     );
   }
-
 
   // ! ==================================================================================
 
@@ -196,11 +172,11 @@ export const ComputerForm = ({
 
         <div className="d-grid gap-1 p-2">{pageDisplay()}</div>
 
-          <FormFooter
-            page={page}
-            setPage={setPage}
-            numPages={FormTitles.length}
-          />
+        <FormFooter
+          page={page}
+          setPage={setPage}
+          numPages={FormTitles.length}
+        />
 
         {page == FormTitles.length - 1 && (
           <button className="btn btn-outline-success w-100 mt-4" type="submit">

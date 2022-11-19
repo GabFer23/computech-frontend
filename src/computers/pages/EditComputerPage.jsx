@@ -5,6 +5,8 @@ import { useAuthStore, useComputersStore } from '../../hooks';
 import { MainLayout } from '../../general/layout';
 import { ComputerForm } from '../components';
 
+// ? =================================================================================================================
+
 export const EditComputerPage = () => {
   // * ====================== OBTENER ID DEL COMPUTADOR ======================
   const { id } = useParams();
@@ -18,7 +20,6 @@ export const EditComputerPage = () => {
   // * ====================== HOOK PARA STORE DE COMPUTADORES ======================
 
   const {
-    startSavingComputer,
     startLoadingComputerById,
     isLoadingComputers,
     activeComputer,
@@ -55,6 +56,10 @@ export const EditComputerPage = () => {
 
   // ! ==================================================================================
 
+  const formFields = { ...activeComputer, brand: activeComputer?.brand._id };
+
+  // ! ==================================================================================
+
   return (
     <MainLayout>
       <>
@@ -64,10 +69,7 @@ export const EditComputerPage = () => {
 
         <div className="row w-100 justify-content-center align-content-center">
           <div className="p-5 shadow rounded col-sm-12 col-md-10 col-lg-8 ">
-            <ComputerForm
-              activeComputer={activeComputer}
-              startSavingComputer={startSavingComputer}
-            />
+            <ComputerForm formFields={formFields} />
           </div>
         </div>
       </>
